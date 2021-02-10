@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="patient_data" model="hospital.management">
+            <field name="patient_name">new_patient</field>
+            <field name="patient_age">55</field>
+            <field name="notes">She is physically and mentally very weak</field>
+            <field name="gender">male</field>
+        </record>
+    </data>
+</odoo>

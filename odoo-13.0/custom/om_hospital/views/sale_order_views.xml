@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    Menuitem Inherit Method-1-->
+    <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+        <field name="name">Inherited Quotations</field>
+        <field name="sequence">50</field>
+    </record>
+
+<!--    Menuitem Inherit Method-2-->
+    <menuitem id="sale.menu_sale_order"
+            name="Inherited Orders"
+            action="sale.action_orders"
+            parent="sale.sale_order_menu"
+            sequence="51" groups="sales_team.group_sale_salesman"/>
+</odoo>

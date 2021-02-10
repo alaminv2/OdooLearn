@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    tree view for patients-->
+    <record id="patient_tree_view" model="ir.ui.view">
+        <field name="name">patient.tree.view</field>
+        <field name="model">health.care.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="patient_name"/>
+                <field name="patient_age"/>
+                <field name="patient_gender"/>
+                <field name="patient_dob"/>
+            </tree>
+        </field>
+    </record>
+    <!--    form view for patients-->
+    <record id="patient_form_view" model="ir.ui.view">
+        <field name="name">patient.form.view</field>
+        <field name="model">health.care.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_patient_appointments" type="object" class="oe_stat_button"
+                                icon="fa-calendar">
+                            <field name="appointment_count" widget="statinfo" string="Appointments"/>
+                        </button>
+                    </div>
+                    <div>
+                        <field name="patient_image" widget="image" class="oe_avatar"/>
+                    </div>
+                    <group>
+                        <field name="patient_name"/>
+                        <field name="name"/>
+                        <field name="patient_age"/>
+                        <field name="patient_gender"/>
+                        <field name="patient_dob"/>
+                        <field name="patient_phone"/>
+                        <field name="reason"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh' : 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    search view for patients-->
+    <record id="patient_search_view" model="ir.ui.view">
+        <field name="name">patient.search.view</field>
+        <field name="model">health.care.patient</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"
+                       filter_domain="['|',('patient_name', 'ilike', self),('name', 'ilike', self),('patient_gender', 'ilike', self)]"/>
+                <field name="patient_name"/>
+                <field name="patient_age"/>
+                <field name="patient_gender"/>
+                <separator/>
+                <filter name="male" string="Male" domain="[('patient_gender', '=', 'male')]"/>
+                <filter name="female" string="Female" domain="[('patient_gender', '=', 'female')]"/>
+                <filter name="others" string="Others" domain="[('patient_gender', '=', 'others')]"/>
+                <group string="Group By" expand="1">
+                    <filter string="Gender" name="patient_gender" context="{'group_by' : 'patient_gender'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <!--    actions for patients-->
+    <record id="patient_action_view" model="ir.actions.act_window">
+        <field name="name">patient.action.view</field>
+        <field name="view_mode">tree,form</field>
+        <field name="res_model">health.care.patient</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="context">{"search_default_female" : 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new patient entity...
+            </p>
+        </field>
+    </record>
+    <!--    menuitems for patients-->
+    <menuitem id="health_care_root" name="Health Care" sequence="-1"/>
+    <menuitem id="health_care_child_1" name="Patients" parent="health_care_root" action="patient_action_view"/>
+</odoo>

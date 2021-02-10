@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!--    record for action type smart buttons-->
+    <!--    <record id="show_patient_appointment" model="ir.actions.act_window">-->
+    <!--        <field name="name">O_Appoint</field>-->
+    <!--        <field name="res_model">hospital.appoinment</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--        <field name="domain">[('patient_id', '=', active_id)]</field>-->
+    <!--        <field name="context">{}</field>-->
+    <!--    </record>-->
+
+    <!--    Tree View For Patients-->
+    <record id="doctor_tree_view" model="ir.ui.view">
+        <field name="name">Doctor_forms</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <tree string="doctor Tree">
+                <field name="name" readonly="1"/>
+                <field name="doctor_name"/>
+                <field name="gender"/>
+                <field name="related_user"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Form View For Patient-->
+    <record id="doctor_form_view" model="ir.ui.view">
+        <field name="name">Doctor_forms</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <form string="Patients">
+                <sheet>
+                    <!--                    <div class="oe_button_box" name="button_box">-->
+                    <!--                        <button class="oe_stat_button" icon="fa-calendar" type="object" name="show_patient_appointment">-->
+                    <!--                            <field name="appointment_count" widget="statinfo" string="Appointment"/>-->
+                    <!--                        </button>-->
+                    <!--                        <button class="oe_stat_button" icon="fa-usd" type="action" name="%(show_patient_appointment)d">-->
+                    <!--                            <field name="appointment_count" widget="statinfo" string="Appointment"/>-->
+                    <!--                        </button>-->
+                    <!--                        <button class="oe_stat_button" icon="fa-archive" type="object" name="toggle_active" string="Archive">-->
+                    <!--                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>-->
+                    <!--                        </button>-->
+                    <!--                    </div>-->
+                    <group>
+                        <h2><field name="name" readonly="1"/></h2>
+                        <field name="doctor_name"/>
+                        <field name="gender"/>
+                        <field name="related_user"/>
+                    </group>
+                </sheet>
+                <div class="o   e_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh' : 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!--    Search view for the patients-->
+    <record id="doctor_search_view" model="ir.ui.view">
+        <field name="name">doctor.search.view</field>
+        <field name="model">hospital.doctor</field>
+        <field name="arch" type="xml">
+            <search string="Search doctor">
+                <field name="doctor_name"
+                       filter_domain="['|',('doctor_name', 'ilike', self),('name', 'ilike', self)]"/>
+                <field name="name"/>
+                <separator/>
+                <filter string="Male" name="male" domain="[('gender', '=', 'male')]"/>
+                <filter string="Female" name="female" domain="[('gender', '=', 'female')]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!--    Actions for the menuItems-->
+    <record id="action_doctor" model="ir.actions.act_window">
+        <field name="name">Doctor</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hospital.doctor</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Doctor !!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="hospital_child_3" name="Doctors" parent="hospital_root" action="action_doctor" sequence="12"/>
+    <!--    <menuitem id="hospital_child_2" name="Finance" parent="hospital_root" action="action_patients"/>-->
+
+</odoo>

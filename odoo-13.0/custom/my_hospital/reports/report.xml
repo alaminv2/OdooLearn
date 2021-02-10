@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            name="my_hospital.health_care_patient_card"
+            file="my_hospital.health_care_patient_card"
+            model="health.care.patient"
+            id="health_patient_card"
+            string="Health Patient Card"
+            report_type="qweb-pdf"/>
+</odoo>

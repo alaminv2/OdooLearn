@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <report
+            id="report_patient_card"
+            string="Patient Info"
+            model="hospital.management"
+            name="om_hospital.report_patient"
+            file="om_hospital.report_patient"
+            report_type="qweb-pdf"
+            menu="True"/>
+
+    <report
+            id="report_appointment_card"
+            string="Patient's All Appointments"
+            model="hospital.appoinment"
+            name="om_hospital.patients_all_appointment"
+            file="om_hospital.patients_all_appointment"
+            report_type="qweb-pdf"
+            menu="True"/>
+om_
+    <report
+            id="report_patient_card_xlsx"
+            string="Patient Info Excel"
+            model="hospital.management"
+            name="om_hospital.report_patient_xlsx"
+            file="om_hospital.report_patient_xlsx"
+            report_type="xlsx"/>
+
+    <!-- QWeb Reports -->
+    <!-- NAME & FILE_NAME should be the same -->
+            <report
+                id="inherited_report_patient_card"
+                model="hospital.management"
+                report_type="qweb-pdf"
+                string="Patient Badge"
+                name="om_hospital.inherited_report_patient"
+                file="om_hospital.inherited_report_patient"
+            />
+
+</odoo>

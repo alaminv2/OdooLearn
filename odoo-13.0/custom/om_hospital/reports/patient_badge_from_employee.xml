@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="inherited_report_patient" inherit_id="hr.print_employee_badge" primary="True">
+        <xpath expr="//table/td[1]/table" position="replace">
+
+        </xpath>
+    </template>
+
+
+
+
+</odoo>

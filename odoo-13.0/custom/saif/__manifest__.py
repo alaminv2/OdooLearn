@@ -1,0 +1,16 @@
+{
+    'name': 'saifjnajnd',
+    'version': '',
+    'summary': '',
+    'description': '',
+    'category': 'others',
+    'author': '',
+    'website': '',
+    'license': '',
+    'depends': [''],
+    'data': [''],
+    'demo': [''],
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+}

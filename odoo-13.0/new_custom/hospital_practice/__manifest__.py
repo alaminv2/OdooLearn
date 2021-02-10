@@ -1,0 +1,16 @@
+{
+    'name': 'Hospital Practice',
+    'version': '',
+    'summary': 'For Implementing Exsisting Knowledge',
+    'description': 'For Implementing Exsisting Knowledge',
+    'category': 'Others',
+    'author': 'Alamin',
+    'website': 'alamin.com',
+    'license': 'AGPL-3',
+    'depends': ['base'],
+    'data': [''],
+    'demo': [''],
+    'application': True,
+    'installable': True,
+    'auto_install': False,
+}

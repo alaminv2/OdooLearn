@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--    action for University Students menu-->
+    <record id="university_students_menu_action" model="ir.actions.act_window">
+        <field name="name">Studens</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.students.managements</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Student....!
+            </p>
+        </field>
+    </record>
+    <!--    action for University Teachers menu-->
+    <record id="university_teachers_menu_action" model="ir.actions.act_window">
+        <field name="name">Teachers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.teachers.managements</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new Teacher....!
+            </p>
+        </field>
+    </record>
+
+
+    <!--    Form View for university students-->
+    <record id="students_form_view" model="ir.ui.view">
+        <field name="name">students.form.view</field>
+        <field name="model">university.students.managements</field>
+        <field name="arch" type="xml">
+            <form string="Students Form">
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="name_seq"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="roll"/>
+                            <field name="username"/>
+                            <field name="fullname"/>
+                            <field name="dept"/>
+                            <field name="sess"/>
+                            <field name="address"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh' : 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    Tree View for Students-->
+    <record id="students_tree_view" model="ir.ui.view">
+        <field name="name">students.tree.view</field>
+        <field name="model">university.students.managements</field>
+        <field name="arch" type="xml">
+            <tree string="Students Tree">
+                <field name="name_seq"/>
+                <field name="roll"/>
+                <field name="username"/>
+                <field name="fullname"/>
+                <field name="dept"/>
+                <field name="sess"/>
+                <field name="address"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Form View for university Teachers-->
+    <record id="teachers_form_view" model="ir.ui.view">
+        <field name="name">teachers.form.view</field>
+        <field name="model">university.teachers.managements</field>
+        <field name="arch" type="xml">
+            <form string="Teachers Form">
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="name_seq"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="username"/>
+                            <field name="fullname"/>
+                            <field name="coursename"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="address"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread" options="{'post_refresh' : 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--    Tree View for Teachers-->
+    <record id="teachers_tree_view" model="ir.ui.view">
+        <field name="name">teachers.tree.view</field>
+        <field name="model">university.teachers.managements</field>
+        <field name="arch" type="xml">
+            <tree string="Teachers Tree">
+                <field name="name_seq"/>
+                <field name="username"/>
+                <field name="fullname"/>
+                <field name="coursename"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="address"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <!--    Search View for Students-->
+    <record id="students_search_view" model="ir.ui.view">
+        <field name="name">students.search.view</field>
+        <field name="model">university.students.managements</field>
+        <field name="arch" type="xml">
+            <search>
+                <!--                <field name="username" filter_domain="['|',('username', 'ilike', 'self'), ('fullname', 'ilike', 'self')]"/>-->
+                <field name="fullname"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!--    Menuitems for University module-->
+    <menuitem id="university_root" name="University" sequence="9"/>
+    <menuitem id="university_child_1" name="Students" sequence="11" parent="university_root"
+              action="university_students_menu_action"/>
+    <menuitem id="university_child_2" name="Teachers" sequence="10" parent="university_root"
+              action="university_teachers_menu_action"/>
+
+</odoo>

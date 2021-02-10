@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    Category for hospital-->
+    <record id="module_category_hospital" model="ir.module.category">
+        <field name="name">Hospital Category</field>
+        <field name="description">Category for Hospital</field>
+        <field name="sequence">45</field>
+    </record>
+
+<!--    Group for Doctor-->
+    <record id="group_hospital_doctor" model="res.groups">
+        <field name="name">Doctor</field>
+        <field name="category_id" ref   ="module_category_hospital"/>
+    </record>
+
+<!--    Group for Manager-->
+    <record id="group_hospital_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_hospital"/>
+        <field name="implied_ids" eval="[(4, ref('group_hospital_doctor'))]"/>
+    </record>
+
+    <!--    Group for Lab-->
+    <record id="group_hospital_lab" model="res.groups">
+        <field name="name">Lab</field>
+        <field name="category_id" ref="module_category_hospital"/>
+<!--        <field name="implied_ids" eval="[(4, ref('group_hospital_doctor'))]"/>-->
+    </record>
+
+<!--    Record Rule for Doctor-->
+    <record id="doctor_record_rule" model="ir.rule">
+        <field name="name">Doctor Rules</field>
+        <field name="model_id" ref="model_hospital_management"/>
+        <field name="domain_force">[('doctor_id.related_user','=',user.id)]</field>
+        <field name="groups" eval="[(4 , ref('group_hospital_doctor'))]"/>
+
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+    </record>
+
+<!--    Record rules for Manager-->
+    <record id="patient_manager_record_rule" model="ir.rule">
+        <field name="name">Manager Rule</field>
+        <field name="model_id" ref="model_hospital_management"/>
+        <field name="domain_force">[]</field>
+        <field name="groups" eval="[(4, ref('group_hospital_manager'))]"/>
+
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+    </record>
+
+<!--    Recode Rule for Lab-->
+    <record id="lab_manager_record_rule" model="ir.rule">
+        <field name="name">Lab Rule</field>
+        <field name="model_id" ref="model_hospital_lab"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_hospital_lab'))]"/>
+
+        <field name="perm_unlink" eval="True"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+    </record>
+
+<!--    Record rule for multi company -->
+    <record id="patient_multi_company_rule" model="ir.rule">
+        <field name="name">Patient multi company rule</field>
+        <field name="model_id" ref="model_hospital_management"/>
+        <field name="global" eval="False"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
